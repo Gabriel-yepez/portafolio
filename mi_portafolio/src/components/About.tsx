@@ -1,4 +1,4 @@
-import { Code, Lightbulb, Users } from "lucide-react";
+import { Code, Lightbulb, Users, CheckCircleIcon, BookOpenText, BookmarkCheck } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 
 export function About() {
@@ -18,6 +18,21 @@ export function About() {
       title: "Colaboración",
       description: "Trabajo en equipo y comunicación efectiva",
     },
+    {
+      icon: BookOpenText,
+      title: "Aprendizaje continuo",
+      description: "Siempre actualizado con nuevas herramientas y tendencias tecnológicas",
+    },
+    {
+      icon: CheckCircleIcon,
+      title: "Resolución de problemas",
+      description: "Capacidad para analizar y resolver desafíos técnicos rápidamente",
+    },
+    {
+      icon: BookmarkCheck,
+      title: "Liderazgo",
+      description: "Habilidad para guiar proyectos y motivar equipos hacia objetivos comunes",
+    },
   ];
 
   return (
@@ -29,7 +44,7 @@ export function About() {
             Soy un desarrollador apasionado con experiencia en la creación de aplicaciones web modernas.
             Me encanta aprender nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
             Mi objetivo es crear productos que no solo funcionen bien, sino que también brinden una excelente
-            experiencia de usuario.
+            experiencia de usuario. Soy una persona proactiva,autodidacta, responsable,con capacidad de hacer relaciones interpersonales.
           </p>
         </div>
 

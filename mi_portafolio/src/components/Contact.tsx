@@ -24,19 +24,19 @@ export function Contact() {
     {
       icon: Mail,
       title: "Email",
-      value: "tu@email.com",
-      link: "mailto:tu@email.com",
+      value: "gabrielyepez04@gmail.com",
+      link: null,
     },
     {
       icon: Phone,
       title: "Teléfono",
-      value: "+34 123 456 789",
-      link: "tel:+34123456789",
+      value: "+58 414 026 8005",
+      link: null,
     },
     {
       icon: MapPin,
       title: "Ubicación",
-      value: "Madrid, España",
+      value: "Caracas, Venezuela",
       link: null,
     },
   ];

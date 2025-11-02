@@ -8,12 +8,12 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground">
-            © {currentYear} Tu Nombre. Todos los derechos reservados.
+            © {currentYear} Gabriel Yépez. Todos los derechos reservados.
           </p>
 
           <div className="flex gap-4">
             <a
-              href="https://github.com/tuusuario"
+              href="https://github.com/Gabriel-yepez"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
@@ -22,7 +22,7 @@ export function Footer() {
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com/in/tuusuario"
+              href="https://www.linkedin.com/in/gabriel-augusto-yepez-arenas-873b80263/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"

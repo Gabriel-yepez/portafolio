@@ -25,23 +25,28 @@ export function Header() {
           <div className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection("about")}
-              className="hover:text-primary transition-colors"
+              className="hover:text-primary transition-colors underline-offset-2 hover:underline decoration-[1.5px] hover:cursor-pointer"
             >
               Sobre mí
             </button>
             <button
               onClick={() => scrollToSection("technologies")}
-              className="hover:text-primary transition-colors"
+              className="hover:text-primary transition-colors underline-offset-2 hover:underline decoration-[1.5px] hover:cursor-pointer"
             >
               Tecnologías
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="hover:text-primary transition-colors"
+              className="hover:text-primary transition-colors underline-offset-2 hover:underline decoration-[1.5px] hover:cursor-pointer"
             >
               Proyectos
             </button>
-            <Button onClick={() => scrollToSection("contact")}>Contacto</Button>
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="hover:cursor-pointer"
+            >
+              Contacto
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
