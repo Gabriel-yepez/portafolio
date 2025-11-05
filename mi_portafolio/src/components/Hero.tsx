@@ -16,7 +16,7 @@ export function Hero() {
     <section id="hero" className="min-h-screen flex items-center justify-center pt-10 px-4">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
+          <section className="space-y-6">
             <div className="space-y-2">
               <p className="text-muted-foreground">Hola, soy</p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl">
@@ -58,16 +58,16 @@ export function Hero() {
                 <img src={linkedin} alt="Linkedin" className="w-12 h-12"/>
               </a>
             </div>
-          </div>
+          </section>
 
-          <div className="flex justify-center">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary">
+          <section className="flex justify-center">
+            <picture className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary">
               <ImageWithFallback
                 src={imagenPerfil}
                 className="w-full h-full object-cover"
               />
-            </div>
-          </div>
+            </picture>
+          </section>
         </div>
       </div>
     </section>

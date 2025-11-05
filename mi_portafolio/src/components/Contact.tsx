@@ -44,33 +44,33 @@ export function Contact() {
   return (
     <section id="contact" className="py-10 px-4">
       <div className="container mx-auto">
-        <div className="max-w-3xl mx-auto text-center mb-12">
+        <section className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="mb-4 text-2xl font-semibold">Contacto</h2>
           <p className="text-lg text-muted-foreground">
             ¿Tienes un proyecto en mente? ¡Hablemos!
           </p>
-        </div>
+        </section>
 
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Contact Info */}
           <div className="space-y-6">
-            <div>
+            <section>
               <h3 className="mb-4 text-center">Información de contacto</h3>
               <p className="text-muted-foreground mb-6">
                 No dudes en contactarme a través de cualquiera de estos medios.
                 Respondo lo más rápido posible.
               </p>
-            </div>
+            </section>
 
-            <div className="space-y-4">
+            <section className="space-y-4">
               {contactInfo.map((item, index) => (
                 <Card key={index}>
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <picture className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <item.icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
+                      </picture>
+                      <article>
                         <p className="text-sm text-muted-foreground">{item.title}</p>
                         {item.link ? (
                           <a
@@ -82,12 +82,12 @@ export function Contact() {
                         ) : (
                           <p>{item.value}</p>
                         )}
-                      </div>
+                      </article>
                     </div>
                   </CardContent>
                 </Card>
               ))}
-            </div>
+            </section>
           </div>
 
           {/* Contact Form */}

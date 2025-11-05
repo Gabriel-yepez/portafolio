@@ -69,14 +69,14 @@ export function Technologies() {
   return (
     <section id="technologies" className="py-20 px-4">
       <div className="container mx-auto">
-        <div className="max-w-3xl mx-auto text-center mb-12">
+        <section className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="mb-4 text-2xl font-semibold">Tecnologías</h2>
           <p className="text-lg text-muted-foreground">
             Estas son algunas de las tecnologías y herramientas con las que trabajo
           </p>
-        </div>
+        </section>
 
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+        <article className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
           {categories.map((category, index) => (
             <div key={index} className="space-y-4">
               <h3>{category.title}</h3>
@@ -100,7 +100,7 @@ export function Technologies() {
               </div>
             </div>
           ))}
-        </div>
+        </article>
       </div>
     </section>
   );

@@ -38,7 +38,7 @@ export function About() {
   return (
     <section id="about" className="py-10 px-4 bg-muted/30">
       <div className="container mx-auto">
-        <div className="max-w-3xl mx-auto text-center mb-12">
+        <article className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="mb-4 text-2xl font-semibold">Sobre mí</h2>
           <p className="text-lg text-muted-foreground">
             Soy un desarrollador apasionado con experiencia en la creación de aplicaciones web modernas.
@@ -46,7 +46,7 @@ export function About() {
             Mi objetivo es crear productos que no solo funcionen bien, sino que también brinden una excelente
             experiencia de usuario. Soy una persona proactiva,autodidacta, responsable,con capacidad de hacer relaciones interpersonales.
           </p>
-        </div>
+        </article>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {highlights.map((item, index) => (
