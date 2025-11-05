@@ -3,26 +3,26 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
+  --background: #F5EBD8; /* beige base */
+  --foreground: #0f172a; /* dark slate for text */
+  --card: #ffffff; /* white cards */
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #38bdf8; /* sky blue */
+  --primary-foreground: #06283b;
+  --secondary: #7dd3fc; /* lighter sky */
+  --secondary-foreground: #0f172a;
+  --muted: #f3efe8; /* soft beige */
+  --muted-foreground: #6b7280;
+  --accent: #e6f8ff; /* pale sky accent */
+  --accent-foreground: #0f172a;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
-  --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
+  --border: rgba(15, 23, 42, 0.08);
+  --input: var(--border); /* use site border color so inputs show border by default */
+  --input-background: #ffffff;
+  --switch-background: #bae6fd;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: oklch(0.708 0 0);
@@ -32,36 +32,36 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #fffaf4;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #0f172a;
+  --sidebar-primary-foreground: #fffaf4;
+  --sidebar-accent: #F0FAFF;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: rgba(15, 23, 42, 0.06);
+  --sidebar-ring: rgba(56, 189, 248, 0.18);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #071026; /* deep navy for dark mode */
+  --foreground: #F5EBD8; /* beige text */
+  --card: #07182b;
+  --card-foreground: #F5EBD8;
+  --popover: #07182b;
+  --popover-foreground: #F5EBD8;
+  --primary: #7dd3fc; /* brighter sky in dark */
+  --primary-foreground: #071026;
+  --secondary: #38bdf8;
+  --secondary-foreground: #F5EBD8;
+  --muted: #0b1220;
+  --muted-foreground: #94a3b8;
+  --accent: #062a3b;
+  --accent-foreground: #F5EBD8;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --border: rgba(255,255,255,0.06);
+  --input: var(--border);
+  --ring: rgba(56, 189, 248, 0.2);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --chart-1: oklch(0.488 0.243 264.376);
@@ -187,4 +187,39 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* Reusable link animation class (framework-agnostic)
+   Use this class on anchors to get a smooth, accessible hover animation.
+*/
+.link-animated {
+  display: inline-block; /* allow transform without affecting layout */
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: transform 260ms cubic-bezier(.2,.8,.2,1),
+    color 200ms ease, box-shadow 260ms cubic-bezier(.2,.8,.2,1), opacity 150ms ease;
+  will-change: transform, box-shadow, opacity;
+}
+
+.link-animated:hover,
+.link-animated:focus {
+  transform: translateY(-3px);
+  color: var(--color-primary);
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.07);
+  opacity: 0.98;
+}
+
+.link-animated:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(2, 6, 23, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-animated {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
 }
