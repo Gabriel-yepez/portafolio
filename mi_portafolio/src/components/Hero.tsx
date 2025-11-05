@@ -13,7 +13,7 @@ export function Hero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4">
+    <section id="hero" className="min-h-screen flex items-center justify-center pt-10 px-4">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -32,10 +32,10 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button onClick={() => scrollToSection("projects")} size="lg" className="hover:scale-105 transition-transform">
+              <Button onClick={() => scrollToSection("projects")} size="lg" className="hover:scale-105 transition-transform cursor-pointer hover:bg-switch-background">
                 Ver proyectos
               </Button>
-              <Button onClick={() => scrollToSection("contact")} variant="outline" size="lg" className="hover:scale-105 transition-transform">
+              <Button onClick={() => scrollToSection("contact")} variant="outline" size="lg" className="hover:scale-105 transition-transform cursor-pointer">
                 Contacto
               </Button>
             </div>

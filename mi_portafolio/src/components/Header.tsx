@@ -43,7 +43,7 @@ export function Header() {
             </button>
             <Button
               onClick={() => scrollToSection("contact")}
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer hover:bg-switch-background" 
             >
               Contacto
             </Button>

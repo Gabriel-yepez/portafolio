@@ -70,7 +70,7 @@ export function Technologies() {
     <section id="technologies" className="py-20 px-4">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4">Tecnologías</h2>
+          <h2 className="mb-4 text-2xl font-semibold">Tecnologías</h2>
           <p className="text-lg text-muted-foreground">
             Estas son algunas de las tecnologías y herramientas con las que trabajo
           </p>

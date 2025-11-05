@@ -36,10 +36,10 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-20 px-4 bg-muted/30">
+    <section id="about" className="py-10 px-4 bg-muted/30">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4">Sobre mí</h2>
+          <h2 className="mb-4 text-2xl font-semibold">Sobre mí</h2>
           <p className="text-lg text-muted-foreground">
             Soy un desarrollador apasionado con experiencia en la creación de aplicaciones web modernas.
             Me encanta aprender nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
