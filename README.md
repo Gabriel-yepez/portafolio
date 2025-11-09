@@ -70,7 +70,3 @@ Este repositorio está disponible para uso personal y educativo. Añade la licen
 
 ---
 
-¡Gracias por revisar el proyecto! Si quieres, puedo:
-- Convertir este `readm.md` en un `README.md` reemplazando el original.
-- Añadir imágenes/screenshots de la UI.
-- Generar un archivo `CONTRIBUTING.md` con normas.
