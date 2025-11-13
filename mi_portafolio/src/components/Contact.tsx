@@ -1,9 +1,10 @@
-import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
+import { contactInfo } from "../util/contactInfo";
+import { Send } from "lucide-react";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -20,26 +21,7 @@ export function Contact() {
     setFormData({ name: "", email: "", message: "" });
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "gabrielyepez04@gmail.com",
-      link: null,
-    },
-    {
-      icon: Phone,
-      title: "Teléfono",
-      value: "+58 414 026 8005",
-      link: null,
-    },
-    {
-      icon: MapPin,
-      title: "Ubicación",
-      value: "Caracas, Venezuela",
-      link: null,
-    },
-  ];
+
 
   return (
     <section id="contact" className="py-10 px-4">

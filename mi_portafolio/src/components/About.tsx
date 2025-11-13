@@ -41,10 +41,12 @@ export function About() {
         <article className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="mb-4 text-2xl font-semibold">Sobre mí</h2>
           <p className="text-lg text-muted-foreground">
-            Soy un desarrollador apasionado con experiencia en la creación de aplicaciones web modernas.
-            Me encanta aprender nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
-            Mi objetivo es crear productos que no solo funcionen bien, sino que también brinden una excelente
-            experiencia de usuario. Soy una persona proactiva,autodidacta, responsable,con capacidad de hacer relaciones interpersonales.
+            Soy un desarrollador apasionado con experiencia en desarrollo frontend y backend, he participado en la
+            creación de aplicaciones web modernas,aplicaiones de escritorio y aplicaciones con integraciones 
+            de inteligencia artificial. Me encanta aprender nuevas tecnologías y enfrentar desafíos que me 
+            permitan crecer profesionalmente. Mi objetivo es crear productos que no solo funcionen bien, sino
+            que también brinden una excelente experiencia de usuario y den un valor agregado. Soy una persona proactiva,
+            autodidacta, responsable, con capacidad de hacer relaciones interpersonales.
           </p>
         </article>
 
