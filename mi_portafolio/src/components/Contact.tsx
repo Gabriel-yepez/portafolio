@@ -5,6 +5,7 @@ import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import { contactInfo } from "../util/contactInfo";
 import { Send } from "lucide-react";
+import { sendEmail } from "../services/emailServices";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -12,13 +13,12 @@ export function Contact() {
     email: "",
     message: "",
   });
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar el formulario
-    console.log("Formulario enviado:", formData);
-    alert("Mensaje enviado! (Esta es una demostración)");
-    setFormData({ name: "", email: "", message: "" });
+
+    sendEmail(e.currentTarget, setIsSending, setFormData);
   };
 
 
@@ -82,6 +82,7 @@ export function Contact() {
                   </label>
                   <Input
                     id="name"
+                    name="name"
                     type="text"
                     placeholder="Tu nombre"
                     value={formData.name}
@@ -98,6 +99,7 @@ export function Contact() {
                   </label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="tu@email.com"
                     value={formData.email}
@@ -114,6 +116,7 @@ export function Contact() {
                   </label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Escribe tu mensaje aquí..."
                     rows={5}
                     value={formData.message}
@@ -124,9 +127,13 @@ export function Contact() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full cursor-pointer hover:bg-switch-background">
+                <Button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full cursor-pointer hover:bg-switch-background"
+                >
                   <Send className="w-4 h-4 mr-2" />
-                  Enviar mensaje
+                  {isSending ? "Enviando..." : "Enviar mensaje"}
                 </Button>
               </form>
             </CardContent>
