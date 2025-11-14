@@ -14,11 +14,23 @@ export function Contact() {
     message: "",
   });
   const [isSending, setIsSending] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    sendEmail(e.currentTarget, setIsSending, setFormData);
+    setSuccessMessage(null);
+    setErrorMessage(null);
+
+    sendEmail(e.currentTarget, setIsSending, setFormData)
+      .then(() => {
+        setSuccessMessage("Mensaje enviado correctamente. Gracias!");
+      })
+      .catch((err) => {
+        setErrorMessage("Error enviando el mensaje. Intenta nuevamente más tarde.");
+        console.error(err);
+      });
   };
 
 
@@ -107,7 +119,7 @@ export function Contact() {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
-                  />
+                    />
                 </div>
 
                 <div>
@@ -124,18 +136,29 @@ export function Contact() {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     required
-                  />
+                    />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSending}
                   className="w-full cursor-pointer hover:bg-switch-background"
-                >
+                  >
                   <Send className="w-4 h-4 mr-2" />
                   {isSending ? "Enviando..." : "Enviar mensaje"}
                 </Button>
               </form>
+              {successMessage && (
+                <div className="mt-4 rounded-md bg-green-50 border border-green-200 p-3 text-green-800">
+                  {successMessage}
+                </div>
+              )}
+
+              {errorMessage && (
+                <div className="mt-4 rounded-md bg-red-50 border border-red-200 p-3 text-red-800">
+                  {errorMessage}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
