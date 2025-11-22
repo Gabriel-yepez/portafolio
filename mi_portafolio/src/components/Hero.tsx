@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import github from "../assets/github.svg"
@@ -5,6 +6,20 @@ import linkedin from "../assets/linkedin.svg"
 import imagenPerfil from "../assets/imagenPerfil.webp"
 
 export function Hero() {
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = imagenPerfil;
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -13,7 +28,7 @@ export function Hero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-10 px-4">
+    <section id="hero" className="min-h-screen flex items-center justify-center pt-18 md:pt-8 px-4">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <section className="space-y-6">
@@ -61,9 +76,16 @@ export function Hero() {
           </section>
 
           <section className="flex justify-center">
-            <picture className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary">
+            <picture className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl">
               <ImageWithFallback
                 src={imagenPerfil}
+                alt="Retrato de Gabriel Yépez"
+                width={512}
+                height={512}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                sizes="(min-width: 768px) 20rem, 16rem"
                 className="w-full h-full object-cover"
               />
             </picture>

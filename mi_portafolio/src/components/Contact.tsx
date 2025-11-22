@@ -51,7 +51,7 @@ export function Contact() {
 
 
   return (
-    <section id="contact" className="py-10 px-4">
+    <section id="contact" className="py-10 px-4 defer-section">
       <div className="container mx-auto">
         <section className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="mb-4 text-2xl font-semibold">Contacto</h2>

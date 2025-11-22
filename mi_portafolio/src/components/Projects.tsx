@@ -8,7 +8,7 @@ import { projects } from "../util/project";
 export function Projects() {
   
   return (
-    <section id="projects" className="py-20 px-4 bg-muted/30">
+    <section id="projects" className="py-8 md:py-20 px-4 bg-muted/30 defer-section">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="mb-4 text-2xl font-semibold">Proyectos</h2>
@@ -24,6 +24,9 @@ export function Projects() {
                 <ImageWithFallback
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
