@@ -6,6 +6,10 @@ import { useState } from "react";
 import { contactInfo } from "../util/contactInfo";
 import { Send } from "lucide-react";
 import { sendEmail } from "../services/emailServices";
+import {
+  type ContactFormErrors,
+  validateContactForm,
+} from "../validation/validationForm";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -16,12 +20,23 @@ export function Contact() {
   const [isSending, setIsSending] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setSuccessMessage(null);
     setErrorMessage(null);
+
+    const validationResult = validateContactForm(formData);
+
+    if (!validationResult.isValid) {
+      setFormErrors(validationResult.errors);
+      setErrorMessage("Por favor corrige los errores del formulario.");
+      return;
+    }
+
+    setFormErrors({});
 
     sendEmail(e.currentTarget, setIsSending, setFormData)
       .then(() => {
@@ -87,7 +102,7 @@ export function Contact() {
           {/* Contact Form */}
           <Card>
             <CardContent className="pt-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div>
                   <label htmlFor="name" className="block mb-2">
                     Nombre
@@ -98,11 +113,17 @@ export function Contact() {
                     type="text"
                     placeholder="Tu nombre"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    required
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, name: value }));
+                      if (formErrors.name) {
+                        setFormErrors((prev) => ({ ...prev, name: undefined }));
+                      }
+                    }}
                   />
+                  {formErrors.name && (
+                    <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>
+                  )}
                 </div>
 
                 <div>
@@ -115,11 +136,17 @@ export function Contact() {
                     type="email"
                     placeholder="tu@email.com"
                     value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, email: value }));
+                      if (formErrors.email) {
+                        setFormErrors((prev) => ({ ...prev, email: undefined }));
+                      }
+                    }}
                     />
+                  {formErrors.email && (
+                    <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>
+                  )}
                 </div>
 
                 <div>
@@ -132,11 +159,17 @@ export function Contact() {
                     placeholder="Escribe tu mensaje aquí..."
                     rows={5}
                     value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    required
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, message: value }));
+                      if (formErrors.message) {
+                        setFormErrors((prev) => ({ ...prev, message: undefined }));
+                      }
+                    }}
                     />
+                  {formErrors.message && (
+                    <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>
+                  )}
                 </div>
 
                 <Button
