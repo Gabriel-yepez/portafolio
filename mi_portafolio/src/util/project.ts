@@ -24,8 +24,8 @@ export const projects = [
       description:
         "Sistema de gestion de métricas y análisis de datos para mejorar el rendimiento del recurso humano a nivel empresarial.",
       image: "https://images.unsplash.com/photo-1722596627369-a743837c7176?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzU5NTkyNjYyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      technologies: ["React", "OpenWeather API", "Chart.js", "CSS3"],
+      technologies: ["Next.js", "Express", "Tailwind.css", "Zustand", "PostgreSQL", "Sequelize"],
       liveUrl: "https://example.com",
-      githubUrl: "https://github.com/tuusuario/proyecto",
+      githubUrl: "https://github.com/Gabriel-yepez/ActionMetrics",
     },
   ];
