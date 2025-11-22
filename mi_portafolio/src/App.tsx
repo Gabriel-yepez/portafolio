@@ -1,6 +1,8 @@
 import { Suspense, lazy } from "react";
+import Skeleton from "@mui/material/Skeleton";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
+import { SectionSkeleton } from "./components/ui/Skeleton";
 
 const AboutSection = lazy(() => import("./components/About").then((module) => ({
   default: module.About,
@@ -22,22 +24,6 @@ const FooterSection = lazy(() => import("./components/Footer").then((module) => 
   default: module.Footer,
 })));
 
-type SectionSkeletonProps = {
-  title: string;
-  isAltBackground?: boolean;
-};
-
-const SectionSkeleton = ({ title, isAltBackground }: SectionSkeletonProps) => (
-  <section
-    aria-label={`Cargando ${title}`}
-    className={`py-20 px-4 animate-pulse ${isAltBackground ? "bg-muted/30" : ""}`}
-  >
-    <div className="container mx-auto">
-      <div className="h-6 w-48 bg-muted rounded mb-4" />
-      <div className="h-4 w-full max-w-2xl bg-muted rounded" />
-    </div>
-  </section>
-);
 
 function App() {
 
@@ -59,7 +45,16 @@ function App() {
           <ContactSection />
         </Suspense>
       </main>
-      <Suspense fallback={<footer className="py-10 text-center text-muted-foreground">Cargando pie de página...</footer>}>
+      <Suspense
+        fallback={(
+          <footer className="py-10 text-center text-muted-foreground" role="status">
+            <div className="container mx-auto space-y-2">
+              <Skeleton variant="text" width="40%" sx={{ mx: "auto" }} />
+              <Skeleton variant="text" width="30%" sx={{ mx: "auto" }} />
+            </div>
+          </footer>
+        )}
+      >
         <FooterSection />
       </Suspense>
     </>
