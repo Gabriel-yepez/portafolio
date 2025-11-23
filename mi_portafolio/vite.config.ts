@@ -1,15 +1,46 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
+export default defineConfig(({ mode }) => {
+  
+  const env = loadEnv(mode, process.cwd(), '')
+  const devPort = Number(env.VITE_DEV_PORT ?? 5173)
+  const strictPort = env.VITE_STRICT_PORT === 'false' ? false : true
+  
+  const cssMinify = (() => {
+    if (env.VITE_CSS_MINIFY === 'lightningcss') {
+      return 'lightningcss'
+    }
+    if (env.VITE_CSS_MINIFY === 'false') {
+      return false
+    }
+    return 'esbuild'
+  })()
+  const cssDevSourcemap = env.VITE_CSS_DEV_SOURCEMAP === 'false' ? false : true
+  const openBrowser = env.VITE_OPEN_BROWSER === 'false' ? false : true
+
+  return {
+    plugins: [react(), tailwindcss()],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
-    }),
-    tailwindcss(),
-  ],
+    },
+    envPrefix: ['VITE_', 'PUBLIC_'],
+    server: {
+      port: Number.isNaN(devPort) ? 5173 : devPort,
+      open: openBrowser,
+      strictPort,
+    },
+    build: {
+      target: env.VITE_BUILD_TARGET ?? 'esnext',
+      cssMinify,
+    },
+    css: {
+      devSourcemap: cssDevSourcemap,
+    },
+  }
 })
