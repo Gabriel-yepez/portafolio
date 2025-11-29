@@ -12,6 +12,10 @@ const TechnologiesSection = lazy(() => import("./components/Technologies").then(
   default: module.Technologies,
 })));
 
+const CertificationsSection = lazy(() => import("./components/Certifications").then((module) => ({
+  default: module.Certifications,
+})));
+
 const ProjectsSection = lazy(() => import("./components/Projects").then((module) => ({
   default: module.Projects,
 })));
@@ -40,6 +44,9 @@ function App() {
         </Suspense>
         <Suspense fallback={<SectionSkeleton title="Proyectos" isAltBackground />}>
           <ProjectsSection />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton title="Certificaciones" isAltBackground />}>
+          <CertificationsSection />
         </Suspense>
         <Suspense fallback={<SectionSkeleton title="Contacto" />}>
           <ContactSection />

@@ -33,7 +33,7 @@ export function Hero() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <section className="space-y-6">
             <div className="space-y-2">
-              <p className="text-muted-foreground">Hola, soy</p>
+              <p className="text-muted-foreground text-xl">Hola, soy</p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl">
                 Gabriel Yépez
               </h1>
@@ -42,7 +42,7 @@ export function Hero() {
               </h2> 
             </div>
             
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
               Apasionado por crear soluciones digitales innovadoras y experiencias de usuario excepcionales.
             </p>
 
@@ -50,7 +50,7 @@ export function Hero() {
               <Button onClick={() => scrollToSection("projects")} size="lg" className="hover:scale-105 transition-transform cursor-pointer hover:bg-switch-background">
                 Ver proyectos
               </Button>
-              <Button onClick={() => scrollToSection("contact")} variant="outline" size="lg" className="hover:scale-105 transition-transform cursor-pointer">
+              <Button onClick={() => scrollToSection("contact")} variant="outline" size="lg" className="hover:scale-105 border border-gray-400 transition-transform cursor-pointer">
                 Contacto
               </Button>
             </div>

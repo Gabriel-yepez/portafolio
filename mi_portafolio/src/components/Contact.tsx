@@ -54,8 +54,8 @@ export function Contact() {
     <section id="contact" className="py-10 px-4 defer-section">
       <div className="container mx-auto">
         <section className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4 text-2xl font-semibold">Contacto</h2>
-          <p className="text-lg text-muted-foreground">
+          <h2 className="mb-4 text-4xl font-semibold">Contacto</h2>
+          <p className="text-xl text-muted-foreground">
             ¿Tienes un proyecto en mente? ¡Hablemos!
           </p>
         </section>
@@ -64,7 +64,7 @@ export function Contact() {
           {/* Contact Info */}
           <div className="space-y-6">
             <section>
-              <h3 className="mb-4 text-center">Información de contacto</h3>
+              <h3 className="mb-4 text-lg text-center">Información de contacto</h3>
               <p className="text-muted-foreground mb-6">
                 No dudes en contactarme a través de cualquiera de estos medios.
                 Respondo lo más rápido posible.
@@ -80,7 +80,7 @@ export function Contact() {
                         <item.icon className="w-5 h-5 text-primary" />
                       </picture>
                       <article>
-                        <p className="text-sm text-muted-foreground">{item.title}</p>
+                        <p className=" text-muted-foreground">{item.title}</p>
                         {item.link ? (
                           <a
                             href={item.link}

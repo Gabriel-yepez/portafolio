@@ -7,7 +7,7 @@ export function Technologies() {
     <section id="technologies" className="py-8 md:py-20 px-4 defer-section">
       <div className="container mx-auto">
         <section className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4 text-2xl font-semibold">Tecnologías</h2>
+          <h2 className="mb-4 text-4xl font-semibold">Tecnologías</h2>
           <p className="text-lg text-muted-foreground">
             Estas son algunas de las tecnologías y herramientas con las que trabajo
           </p>

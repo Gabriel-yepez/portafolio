@@ -1,45 +1,13 @@
-import { Code, Lightbulb, Users, CheckCircleIcon, BookOpenText, BookmarkCheck } from "lucide-react";
+import { highlights } from "../util/about";
 import { Card, CardContent } from "./ui/card";
 
 export function About() {
-  const highlights = [
-    {
-      icon: Code,
-      title: "Desarrollo",
-      description: "Experiencia en desarrollo frontend y backend con las últimas tecnologías",
-    },
-    {
-      icon: Lightbulb,
-      title: "Creatividad",
-      description: "Soluciones innovadoras para problemas complejos",
-    },
-    {
-      icon: Users,
-      title: "Colaboración",
-      description: "Trabajo en equipo y comunicación efectiva",
-    },
-    {
-      icon: BookOpenText,
-      title: "Aprendizaje continuo",
-      description: "Siempre actualizado con nuevas herramientas y tendencias tecnológicas",
-    },
-    {
-      icon: CheckCircleIcon,
-      title: "Resolución de problemas",
-      description: "Capacidad para analizar y resolver desafíos técnicos rápidamente",
-    },
-    {
-      icon: BookmarkCheck,
-      title: "Liderazgo",
-      description: "Habilidad para guiar proyectos y motivar equipos hacia objetivos comunes",
-    },
-  ];
-
+  
   return (
-    <section id="about" className="py-10 px-4 bg-muted/30 defer-section">
+    <section id="about" className="pt-20 px-4 bg-muted/30 defer-section">
       <div className="container mx-auto">
         <article className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4 text-2xl font-semibold">Sobre mí</h2>
+          <h2 className="mb-4 text-4xl font-semibold">Sobre mí</h2>
           <p className="text-lg text-muted-foreground">
             Soy un desarrollador apasionado con experiencia en desarrollo frontend y backend con
             <strong className="text-black"> 1 año de experiencia</strong>, he participado en la

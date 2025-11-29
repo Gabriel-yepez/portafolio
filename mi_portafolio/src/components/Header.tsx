@@ -25,21 +25,35 @@ export function Header() {
           <div className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection("about")}
-              className="hover:text-primary transition-colors underline-offset-2 hover:underline decoration-[1.5px] hover:cursor-pointer"
+              className="hover:text-primary transition-colors underline-offset-2 
+              hover:underline decoration-[1.5px] hover:cursor-pointer
+              focus:underline focus:text-primary"
             >
               Sobre mí
             </button>
             <button
               onClick={() => scrollToSection("technologies")}
-              className="hover:text-primary transition-colors underline-offset-2 hover:underline decoration-[1.5px] hover:cursor-pointer"
+              className="hover:text-primary transition-colors underline-offset-2 
+              hover:underline decoration-[1.5px] hover:cursor-pointer
+              focus:underline focus:text-primary"
             >
               Tecnologías
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="hover:text-primary transition-colors underline-offset-2 hover:underline decoration-[1.5px] hover:cursor-pointer"
+              className="hover:text-primary transition-colors underline-offset-2 
+              hover:underline decoration-[1.5px] hover:cursor-pointer 
+              focus:underline focus:text-primary"
             >
               Proyectos
+            </button>
+            <button
+              onClick={() => scrollToSection("certifications")}
+              className="hover:text-primary transition-colors underline-offset-2 
+              hover:underline decoration-[1.5px] hover:cursor-pointer
+              focus:underline focus:text-primary"
+            >
+              Certificaciones
             </button>
             <Button
               onClick={() => scrollToSection("contact")}
@@ -78,6 +92,12 @@ export function Header() {
               className="text-left hover:text-primary transition-colors"
             >
               Proyectos
+            </button>
+             <button
+              onClick={() => scrollToSection("certifications")}
+              className="text-left hover:text-primary transition-colors"
+            >
+              Certificaciones
             </button>
             <Button onClick={() => scrollToSection("contact")}>Contacto</Button>
           </div>

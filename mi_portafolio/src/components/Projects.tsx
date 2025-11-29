@@ -11,8 +11,8 @@ export function Projects() {
     <section id="projects" className="py-8 md:py-20 px-4 bg-muted/30 defer-section">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4 text-2xl font-semibold">Proyectos</h2>
-          <p className="text-lg text-muted-foreground">
+          <h2 className="mb-4 text-4xl font-semibold">Proyectos</h2>
+          <p className="text-xl text-muted-foreground">
             Algunos de los proyectos en los que he trabajado
           </p>
         </div>
@@ -32,7 +32,7 @@ export function Projects() {
               </div>
               
               <CardHeader>
-                <h3>{project.title}</h3>
+                <h3 className="text-lg font-semibold">{project.title}</h3>
               </CardHeader>
 
               <CardContent className="flex-1">
