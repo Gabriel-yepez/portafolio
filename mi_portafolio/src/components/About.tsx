@@ -1,8 +1,10 @@
 import { highlights } from "../util/about";
 import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
 
 export function About() {
-  
+  const cvUrl = import.meta.env.VITE_CV_URL ?? "/cv.pdf"
+
   return (
     <section id="about" className="pt-20 px-4 bg-muted/30 defer-section">
       <div className="container mx-auto">
@@ -17,6 +19,20 @@ export function About() {
             que también brinden una excelente experiencia de usuario y den un valor agregado. Soy una persona proactiva,
             autodidacta, responsable, con capacidad de hacer relaciones interpersonales.
           </p>
+          <div className="mt-8 flex flex-col items-center gap-3">
+            <span className="text-sm text-muted-foreground">
+              Ve mi Curricullum sin compromiso!!
+            </span>
+            <Button
+              asChild
+              size="lg"
+              className="bg-black rounded-lg text-white hover:bg-black/85 cursor-pointer transition-colors"
+            >
+              <a href={cvUrl} target="_blank" rel="noopener noreferrer">
+                Ver CV
+              </a>
+            </Button>
+          </div>
         </article>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">

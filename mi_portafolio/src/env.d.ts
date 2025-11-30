@@ -12,6 +12,7 @@ interface ImportMetaEnv {
   readonly VITE_CSS_MINIFY?: 'esbuild' | 'lightningcss' | 'false'
   readonly VITE_CSS_DEV_SOURCEMAP?: 'true' | 'false'
   readonly PUBLIC_ANALYTICS_KEY?: string
+  readonly VITE_CV_URL?: string
 }
 
 interface ImportMeta {
