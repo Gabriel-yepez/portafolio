@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "contacts",
+  "info": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "Contact",
+    "description": "Contact section content"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true, "default": "Contacto" },
+    "description": { "type": "text", "required": true },
+    "infoItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.contact-info"
+    },
+    "formEnabled": { "type": "boolean", "default": true }
+  }
+}

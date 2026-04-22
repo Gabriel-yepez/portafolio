@@ -1,0 +1,16 @@
+{
+  "kind": "singleType",
+  "collectionName": "technology_sections",
+  "info": {
+    "singularName": "technology-section",
+    "pluralName": "technology-sections",
+    "displayName": "Technology Section",
+    "description": "Header and intro for the Technologies section"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true, "default": "Tecnologías" },
+    "description": { "type": "text", "required": true }
+  }
+}
