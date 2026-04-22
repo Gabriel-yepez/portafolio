@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_contact_infos",
+  "info": {
+    "displayName": "Contact Info",
+    "description": "Single row of contact information",
+    "icon": "envelope"
+  },
+  "options": {},
+  "attributes": {
+    "iconName": {
+      "type": "enumeration",
+      "enum": ["Mail", "Phone", "MapPin"],
+      "required": true
+    },
+    "title": { "type": "string", "required": true },
+    "value": { "type": "string", "required": true },
+    "link": { "type": "string" }
+  }
+}

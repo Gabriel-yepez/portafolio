@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_highlights",
+  "info": {
+    "displayName": "Highlight",
+    "description": "Icon + title + description card for About section",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "iconName": {
+      "type": "enumeration",
+      "enum": [
+        "Code",
+        "Lightbulb",
+        "Users",
+        "CheckCircleIcon",
+        "BookOpenText",
+        "BookmarkCheck"
+      ],
+      "required": true
+    },
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text", "required": true }
+  }
+}

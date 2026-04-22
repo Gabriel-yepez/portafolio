@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_seos",
+  "info": {
+    "displayName": "SEO",
+    "description": "Site-level SEO metadata",
+    "icon": "search"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": { "type": "string", "required": true, "maxLength": 60 },
+    "metaDescription": { "type": "text", "required": true, "maxLength": 160 },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

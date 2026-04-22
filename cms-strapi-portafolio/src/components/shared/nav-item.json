@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_nav_items",
+  "info": {
+    "displayName": "Nav Item",
+    "description": "Header navigation entry pointing to a section id",
+    "icon": "bars"
+  },
+  "options": {},
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "targetSectionId": { "type": "string", "required": true }
+  }
+}
