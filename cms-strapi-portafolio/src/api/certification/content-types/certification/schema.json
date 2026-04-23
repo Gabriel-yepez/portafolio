@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certifications",
+  "info": {
+    "singularName": "certification",
+    "pluralName": "certifications",
+    "displayName": "Certification",
+    "description": "Professional certifications and badges"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "title":         { "type": "string",  "required": true },
+    "issuer":        { "type": "string",  "required": true },
+    "issueDate":     { "type": "string",  "required": true },
+    "description":   { "type": "text",    "required": true },
+    "credentialId":  { "type": "string" },
+    "credentialUrl": { "type": "string",  "required": true },
+    "topics":        { "type": "json" },
+    "order":         { "type": "integer", "default": 0 }
+  }
+}
