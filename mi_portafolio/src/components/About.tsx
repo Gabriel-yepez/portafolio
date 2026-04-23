@@ -17,6 +17,8 @@ export function About() {
       </section>
     )
 
+  if (!data) return null
+
   return (
     <section id="about" className="py-10 px-4 bg-muted/30">
       <div className="container mx-auto">

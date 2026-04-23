@@ -17,6 +17,8 @@ export function Technologies() {
       </section>
     )
 
+  if (!data) return null
+
   return (
     <section id="technologies" className="py-20 px-4">
       <div className="container mx-auto">

@@ -34,6 +34,8 @@ export function Contact() {
       </section>
     )
 
+  if (!data) return null
+
   return (
     <section id="contact" className="py-10 px-4">
       <div className="container mx-auto">

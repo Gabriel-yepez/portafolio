@@ -21,6 +21,8 @@ export function Projects() {
       </section>
     )
 
+  if (!data) return null
+
   return (
     <section id="projects" className="py-20 px-4 bg-muted/30">
       <div className="container mx-auto">

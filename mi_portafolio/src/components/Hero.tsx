@@ -30,6 +30,8 @@ export function Hero() {
       </section>
     )
 
+  if (!data) return null
+
   return (
     <section
       id="hero"
