@@ -174,7 +174,12 @@ async function main() {
           description: project.description,
           liveUrl: project.liveUrl,
           githubUrl: project.githubUrl,
-          technologies: project.techSlugs.map((s) => technologyIdBySlug[s]).filter(Boolean),
+          // Cast: Strapi v5 entityService typings resolve manyToMany relation
+          // input to XOneInput when TRelationKind isn't narrowed at the call
+          // site, so passing a number[] (valid at runtime) fails typecheck.
+          technologies: project.techSlugs
+            .map((s) => technologyIdBySlug[s])
+            .filter(Boolean) as any,
           order: project.order,
           featured: project.featured,
           publishedAt: new Date(),
