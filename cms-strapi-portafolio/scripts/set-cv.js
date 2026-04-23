@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { createStrapi, compileStrapi } = require('@strapi/strapi');
 
-const CV_PATH = '/Users/gabrielyepez/Library/Mobile Documents/com~apple~CloudDocs/Currículum Gabriel Yépez.pdf';
+const CV_PATH = '/Users/gabrielyepez/Documents/Datos personales/Currículum Gabriel .pdf';
 const CV_FILENAME = 'curriculum-gabriel-yepez.pdf';
 
 async function main() {
@@ -19,9 +19,11 @@ async function main() {
 
     let fileRecord;
     if (existing) {
-      strapi.log.info('[set-cv] CV already uploaded, reusing existing file');
-      fileRecord = existing;
-    } else {
+      await strapi.plugin('upload').service('upload').remove(existing);
+      strapi.log.info('[set-cv] removed old CV file, reuploading');
+    }
+
+    {
       const stats = fs.statSync(CV_PATH);
       const [uploaded] = await strapi.plugin('upload').service('upload').upload({
         data: {},
