@@ -12,6 +12,7 @@
   "attributes": {
     "title": { "type": "string", "required": true, "default": "Sobre mí" },
     "description": { "type": "text", "required": true },
+    "cvUrl": { "type": "string" },
     "highlights": {
       "type": "component",
       "repeatable": true,
