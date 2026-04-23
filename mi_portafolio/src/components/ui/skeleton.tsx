@@ -99,6 +99,24 @@ export function ProjectsSkeleton() {
   )
 }
 
+export function CertificationsSkeleton() {
+  return (
+    <section id="certifications" className="py-20 px-4">
+      <div className="container mx-auto">
+        <div className="max-w-3xl mx-auto text-center mb-12 space-y-3">
+          <Skeleton className="h-8 w-48 mx-auto" />
+          <Skeleton className="h-4 w-80 mx-auto" />
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-64 w-full" />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function ContactSkeleton() {
   return (
     <section id="contact" className="py-10 px-4">

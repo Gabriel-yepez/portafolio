@@ -1,5 +1,5 @@
 import type {
-  Hero, About, Contact, Footer, Global, Project, TechCategory,
+  Hero, About, Contact, Footer, Global, Project, TechCategory, Certification,
 } from '../types/cms'
 
 const BASE = import.meta.env.VITE_STRAPI_URL ?? 'http://localhost:1337'
@@ -24,4 +24,6 @@ export const api = {
     get<TechCategory[]>(
       '/api/tech-categories?populate[technologies][populate]=icon&sort=order:asc',
     ),
+  certifications: () =>
+    get<Certification[]>('/api/certifications?sort=order:asc'),
 }

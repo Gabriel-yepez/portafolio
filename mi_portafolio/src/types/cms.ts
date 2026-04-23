@@ -54,7 +54,20 @@ export interface Hero {
 export interface About {
   title: string
   description: string
+  cvUrl: string | null
   highlights: Highlight[]
+}
+
+export interface Certification {
+  id: number
+  title: string
+  issuer: string
+  issueDate: string
+  description: string
+  credentialId: string | null
+  credentialUrl: string
+  topics: string[] | null
+  order: number
 }
 
 export interface Contact {
