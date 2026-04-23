@@ -379,6 +379,27 @@ async function main() {
       }
     }
 
+    // Grant Public role find/findOne on certification
+    const publicRole = await strapi.query('plugin::users-permissions.role').findOne({
+      where: { type: 'public' },
+    });
+    if (publicRole) {
+      for (const action of [
+        'api::certification.certification.find',
+        'api::certification.certification.findOne',
+      ]) {
+        const exists = await strapi.query('plugin::users-permissions.permission').findOne({
+          where: { action, role: publicRole.id },
+        });
+        if (!exists) {
+          await strapi.query('plugin::users-permissions.permission').create({
+            data: { action, role: publicRole.id },
+          });
+          strapi.log.info(`[seed] granted public permission: ${action}`);
+        }
+      }
+    }
+
     strapi.log.info('[seed] done');
   } finally {
     await strapi.destroy();
