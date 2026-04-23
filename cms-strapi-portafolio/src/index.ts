@@ -46,37 +46,43 @@ export default {
       for (const action of PUBLIC_READ_ACTIONS) {
         const permissionAction = `${uid}.${action}`;
 
-        const existing = await strapi
-          .query('plugin::users-permissions.permission')
-          .findOne({
-            where: { action: permissionAction, role: publicRole.id },
-          });
+        try {
+          const existing = await strapi
+            .query('plugin::users-permissions.permission')
+            .findOne({
+              where: { action: permissionAction, role: publicRole.id },
+            });
 
-        if (existing) {
-          if (!existing.enabled) {
-            await strapi
-              .query('plugin::users-permissions.permission')
-              .update({
-                where: { id: existing.id },
-                data: { enabled: true },
-              });
-            strapi.log.info(
-              `[bootstrap] Enabled public permission ${permissionAction}.`,
-            );
+          if (existing) {
+            if (!existing.enabled) {
+              await strapi
+                .query('plugin::users-permissions.permission')
+                .update({
+                  where: { id: existing.id },
+                  data: { enabled: true },
+                });
+              strapi.log.info(
+                `[bootstrap] Enabled public permission ${permissionAction}.`,
+              );
+            }
+            continue;
           }
-          continue;
-        }
 
-        await strapi.query('plugin::users-permissions.permission').create({
-          data: {
-            action: permissionAction,
-            role: publicRole.id,
-            enabled: true,
-          },
-        });
-        strapi.log.info(
-          `[bootstrap] Granted public permission ${permissionAction}.`,
-        );
+          await strapi.query('plugin::users-permissions.permission').create({
+            data: {
+              action: permissionAction,
+              role: publicRole.id,
+              enabled: true,
+            },
+          });
+          strapi.log.info(
+            `[bootstrap] Granted public permission ${permissionAction}.`,
+          );
+        } catch (err) {
+          strapi.log.error(
+            `[bootstrap] Failed to set permission for ${permissionAction}: ${err}`,
+          );
+        }
       }
     }
   },

@@ -78,8 +78,6 @@ const PROJECTS = [
     slug: 'e-commerce-platform',
     description:
       'Plataforma de comercio electrónico completa con carrito de compras, sistema de pagos y panel de administración.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1566915896913-549d796d2166?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjB3b3Jrc3BhY2UlMjBjb2Rpbmd8ZW58MXx8fHwxNzU5NjU1MzA4fDA&ixlib=rb-4.1.0&q=80&w=1080',
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com/tuusuario/proyecto',
     techSlugs: ['react', 'nodejs', 'mongodb'],
@@ -91,8 +89,6 @@ const PROJECTS = [
     slug: 'task-management-app',
     description:
       'Aplicación de gestión de tareas con funcionalidades de colaboración en equipo, seguimiento de proyectos y notificaciones.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXNpZ258ZW58MXx8fHwxNzU5NjI4MjM4fDA&ixlib=rb-4.1.0&q=80&w=1080',
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com/tuusuario/proyecto',
     techSlugs: ['nextjs', 'typescript', 'postgresql', 'tailwind-css'],
@@ -104,8 +100,6 @@ const PROJECTS = [
     slug: 'weather-dashboard',
     description:
       'Dashboard interactivo del clima con pronósticos en tiempo real, gráficos y mapas para múltiples ubicaciones.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1722596627369-a743837c7176?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzU5NTkyNjYyfDA&ixlib=rb-4.1.0&q=80&w=1080',
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com/tuusuario/proyecto',
     techSlugs: ['react', 'css3'],
