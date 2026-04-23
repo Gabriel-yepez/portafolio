@@ -1,5 +1,7 @@
 import { Suspense, lazy } from "react";
 import Skeleton from "@mui/material/Skeleton";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { SectionSkeleton } from "./components/ui/Skeleton";
@@ -32,7 +34,7 @@ const FooterSection = lazy(() => import("./components/Footer").then((module) => 
 function App() {
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Header />
       <main>
         <Hero/>
@@ -64,7 +66,7 @@ function App() {
       >
         <FooterSection />
       </Suspense>
-    </>
+    </QueryClientProvider>
   )
 }
 

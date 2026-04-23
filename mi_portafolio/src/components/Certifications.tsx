@@ -1,19 +1,21 @@
-import { useId } from "react"
-import { ExternalLink, MoveLeft, MoveRight } from "lucide-react"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { A11y, Autoplay, Navigation, Pagination } from "swiper/modules"
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
-
-import { certifications } from "../util/certifications"
-import { Badge } from "./ui/badge"
-import { Button } from "./ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
+import { useId } from "react";
+import { ExternalLink, MoveLeft, MoveRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { useCertifications } from "../hooks/useCertifications";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 
 export function Certifications() {
-  const prevButtonId = useId()
-  const nextButtonId = useId()
+  const prevButtonId = useId();
+  const nextButtonId = useId();
+  const { data, isError } = useCertifications();
+
+  if (isError || !data) return null;
 
   return (
     <section id="certifications" className="py-8 md:py-20 px-4 defer-section">
@@ -38,34 +40,31 @@ export function Certifications() {
           centeredSlides
           grabCursor
           onBeforeInit={(swiper) => {
-            const navigation = swiper.params.navigation
+            const navigation = swiper.params.navigation;
             if (navigation && typeof navigation !== "boolean") {
-              navigation.prevEl = `#${prevButtonId}`
-              navigation.nextEl = `#${nextButtonId}`
+              navigation.prevEl = `#${prevButtonId}`;
+              navigation.nextEl = `#${nextButtonId}`;
             }
           }}
           className="pb-16 rounded-2xl"
         >
-          {certifications.map((certification) => (
-            <SwiperSlide key={`${certification.title}-${certification.issuer}`} className="h-full ">
+          {data.map((cert) => (
+            <SwiperSlide key={`${cert.title}-${cert.issuer}`} className="h-full">
               <Card className="h-full">
                 <CardHeader>
                   <div className="flex flex-col gap-1 text-left">
-                    <h3 className="text-lg font-semibold">{certification.title}</h3>
-                    <p className="text-sm text-muted-foreground">{certification.issuer}</p>
+                    <h3 className="text-lg font-semibold">{cert.title}</h3>
+                    <p className="text-sm text-muted-foreground">{cert.issuer}</p>
                   </div>
                   <Badge variant="secondary" className="w-fit mt-2">
-                    {certification.issueDate}
+                    {cert.issueDate}
                   </Badge>
                 </CardHeader>
 
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    {certification.description}
-                  </p>
-
+                  <p className="text-sm text-muted-foreground">{cert.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {certification.topics.map((topic) => (
+                    {(cert.topics ?? []).map((topic) => (
                       <Badge key={topic} variant="outline">
                         {topic}
                       </Badge>
@@ -74,18 +73,13 @@ export function Certifications() {
                 </CardContent>
 
                 <CardFooter className="flex items-center justify-between gap-4 flex-wrap">
-                  {certification.credentialId && (
+                  {cert.credentialId && (
                     <span className="text-xs text-muted-foreground">
-                      ID: <span className="font-semibold">{certification.credentialId}</span>
+                      ID: <span className="font-semibold">{cert.credentialId}</span>
                     </span>
                   )}
-
                   <Button variant="outline" size="sm" asChild>
-                    <a
-                      href={certification.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Ver credencial
                     </a>
@@ -114,5 +108,5 @@ export function Certifications() {
         </div>
       </div>
     </section>
-  )
+  );
 }
