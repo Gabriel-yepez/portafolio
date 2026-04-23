@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About",
+    "description": "About section content"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true, "default": "Sobre mí" },
+    "description": { "type": "text", "required": true },
+    "cvUrl": { "type": "string" },
+    "highlights": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.highlight",
+      "min": 1,
+      "max": 12
+    }
+  }
+}

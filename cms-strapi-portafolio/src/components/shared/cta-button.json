@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_cta_buttons",
+  "info": {
+    "displayName": "CTA Button",
+    "description": "Call-to-action button linking to a section id or external URL",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "targetSectionId": { "type": "string" },
+    "externalUrl": { "type": "string" },
+    "variant": {
+      "type": "enumeration",
+      "enum": ["primary", "outline"],
+      "default": "primary"
+    }
+  }
+}

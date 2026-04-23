@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_social_links",
+  "info": {
+    "displayName": "Social Link",
+    "description": "External social network link",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": ["github", "linkedin", "twitter", "x", "instagram", "other"],
+      "required": true,
+      "default": "other"
+    },
+    "url": { "type": "string", "required": true },
+    "label": { "type": "string" }
+  }
+}
