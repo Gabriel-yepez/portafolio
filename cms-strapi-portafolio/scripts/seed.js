@@ -1,12 +1,12 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { createStrapi, compileStrapi } from '@strapi/strapi';
+'use strict';
+
+const fs = require('node:fs');
+const path = require('node:path');
+const { createStrapi, compileStrapi } = require('@strapi/strapi');
 
 const ASSETS_DIR = path.resolve(__dirname, '..', 'data', 'assets');
 
-type UploadedFile = { id: number; name: string };
-
-async function uploadAsset(strapi: any, filename: string): Promise<UploadedFile | null> {
+async function uploadAsset(strapi, filename) {
   const filePath = path.join(ASSETS_DIR, filename);
   if (!fs.existsSync(filePath)) {
     strapi.log.warn(`[seed] asset missing: ${filename}`);
@@ -14,14 +14,14 @@ async function uploadAsset(strapi: any, filename: string): Promise<UploadedFile 
   }
   const stats = fs.statSync(filePath);
   const ext = path.extname(filename).slice(1).toLowerCase();
-  const mimeMap: Record<string, string> = {
+  const mimeMap = {
     svg: 'image/svg+xml',
     webp: 'image/webp',
     png: 'image/png',
     jpg: 'image/jpeg',
     jpeg: 'image/jpeg',
   };
-  const mime = mimeMap[ext] ?? 'application/octet-stream';
+  const mime = mimeMap[ext] || 'application/octet-stream';
 
   const existing = await strapi.query('plugin::upload.file').findOne({
     where: { name: filename },
@@ -48,7 +48,7 @@ const TECH_CATEGORIES = [
   { title: 'Herramientas', slug: 'herramientas', order: 4 },
 ];
 
-const TECHNOLOGIES: { name: string; slug: string; icon: string; category: string; order: number }[] = [
+const TECHNOLOGIES = [
   { name: 'React', slug: 'react', icon: 'react.svg', category: 'frontend', order: 1 },
   { name: 'TypeScript', slug: 'typescript', icon: 'typescript.svg', category: 'frontend', order: 2 },
   { name: 'Next.js', slug: 'nextjs', icon: 'nextjs.svg', category: 'frontend', order: 3 },
@@ -119,32 +119,30 @@ async function main() {
   const strapi = await createStrapi(appContext).load();
 
   try {
-    // 1. Tech categories
-    const categoryIdBySlug: Record<string, number> = {};
+    const categoryIdBySlug = {};
     for (const cat of TECH_CATEGORIES) {
       const existing = await strapi.entityService.findMany('api::tech-category.tech-category', {
         filters: { slug: cat.slug },
         limit: 1,
       });
-      if (existing && (existing as any[]).length > 0) {
-        categoryIdBySlug[cat.slug] = (existing as any[])[0].id;
+      if (existing && existing.length > 0) {
+        categoryIdBySlug[cat.slug] = existing[0].id;
       } else {
         const created = await strapi.entityService.create('api::tech-category.tech-category', {
           data: cat,
         });
-        categoryIdBySlug[cat.slug] = created.id as number;
+        categoryIdBySlug[cat.slug] = created.id;
       }
     }
 
-    // 2. Technologies
-    const technologyIdBySlug: Record<string, number> = {};
+    const technologyIdBySlug = {};
     for (const tech of TECHNOLOGIES) {
       const existing = await strapi.entityService.findMany('api::technology.technology', {
         filters: { slug: tech.slug },
         limit: 1,
       });
-      if (existing && (existing as any[]).length > 0) {
-        technologyIdBySlug[tech.slug] = (existing as any[])[0].id;
+      if (existing && existing.length > 0) {
+        technologyIdBySlug[tech.slug] = existing[0].id;
         continue;
       }
       const icon = await uploadAsset(strapi, tech.icon);
@@ -154,19 +152,18 @@ async function main() {
           slug: tech.slug,
           category: categoryIdBySlug[tech.category],
           order: tech.order,
-          icon: icon?.id ?? null,
+          icon: icon ? icon.id : null,
         },
       });
-      technologyIdBySlug[tech.slug] = created.id as number;
+      technologyIdBySlug[tech.slug] = created.id;
     }
 
-    // 3. Projects
     for (const project of PROJECTS) {
       const existing = await strapi.entityService.findMany('api::project.project', {
         filters: { slug: project.slug },
         limit: 1,
       });
-      if (existing && (existing as any[]).length > 0) continue;
+      if (existing && existing.length > 0) continue;
       await strapi.entityService.create('api::project.project', {
         data: {
           title: project.title,
@@ -174,12 +171,7 @@ async function main() {
           description: project.description,
           liveUrl: project.liveUrl,
           githubUrl: project.githubUrl,
-          // Cast: Strapi v5 entityService typings resolve manyToMany relation
-          // input to XOneInput when TRelationKind isn't narrowed at the call
-          // site, so passing a number[] (valid at runtime) fails typecheck.
-          technologies: project.techSlugs
-            .map((s) => technologyIdBySlug[s])
-            .filter(Boolean) as any,
+          technologies: project.techSlugs.map((s) => technologyIdBySlug[s]).filter(Boolean),
           order: project.order,
           featured: project.featured,
           publishedAt: new Date(),
@@ -187,20 +179,18 @@ async function main() {
       });
     }
 
-    // 4. Hero (single type)
     const heroExists = await strapi.entityService.findMany('api::hero.hero');
     if (!heroExists || (Array.isArray(heroExists) && heroExists.length === 0)) {
       const profileImage = await uploadAsset(strapi, 'imagenPerfil.webp');
-      const githubIcon = await uploadAsset(strapi, 'github.svg');
-      const linkedinIcon = await uploadAsset(strapi, 'linkedin.svg');
-      void githubIcon; void linkedinIcon;
+      await uploadAsset(strapi, 'github.svg');
+      await uploadAsset(strapi, 'linkedin.svg');
       await strapi.entityService.create('api::hero.hero', {
         data: {
           greeting: 'Hola, soy',
           name: 'Gabriel Yépez',
           role: 'Desarrollador de Software',
           bio: 'Apasionado por crear soluciones digitales innovadoras y experiencias de usuario excepcionales.',
-          profileImage: profileImage?.id ?? null,
+          profileImage: profileImage ? profileImage.id : null,
           primaryCta: {
             label: 'Ver proyectos',
             targetSectionId: 'projects',
@@ -223,7 +213,6 @@ async function main() {
       });
     }
 
-    // 5. About
     const aboutExists = await strapi.entityService.findMany('api::about.about');
     if (!aboutExists || (Array.isArray(aboutExists) && aboutExists.length === 0)) {
       await strapi.entityService.create('api::about.about', {
@@ -243,7 +232,6 @@ async function main() {
       });
     }
 
-    // 6. Technology section
     const techSectionExists = await strapi.entityService.findMany('api::technology-section.technology-section');
     if (!techSectionExists || (Array.isArray(techSectionExists) && techSectionExists.length === 0)) {
       await strapi.entityService.create('api::technology-section.technology-section', {
@@ -254,7 +242,6 @@ async function main() {
       });
     }
 
-    // 7. Contact
     const contactExists = await strapi.entityService.findMany('api::contact.contact');
     if (!contactExists || (Array.isArray(contactExists) && contactExists.length === 0)) {
       await strapi.entityService.create('api::contact.contact', {
@@ -271,7 +258,6 @@ async function main() {
       });
     }
 
-    // 8. Footer
     const footerExists = await strapi.entityService.findMany('api::footer.footer');
     if (!footerExists || (Array.isArray(footerExists) && footerExists.length === 0)) {
       await strapi.entityService.create('api::footer.footer', {
@@ -289,7 +275,6 @@ async function main() {
       });
     }
 
-    // 9. Global
     const globalExists = await strapi.entityService.findMany('api::global.global');
     if (!globalExists || (Array.isArray(globalExists) && globalExists.length === 0)) {
       await strapi.entityService.create('api::global.global', {
