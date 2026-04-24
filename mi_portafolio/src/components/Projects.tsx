@@ -7,6 +7,7 @@ import { useProjects } from "../hooks/useProjects";
 import { assetUrl } from "../services/api";
 import { useInView } from "../hooks/useInView";
 import { motion } from "framer-motion";
+import { MotionSection } from "./ui/MotionSection";
 
 const container = {
   hidden: {},
@@ -25,7 +26,7 @@ export function Projects() {
   if (isError || !data) return null;
 
   return (
-    <section id="projects" className="py-20 px-4">
+    <MotionSection id="projects" className="py-20 px-4">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-14">
           <h2 className="text-4xl font-bold mb-4">Proyectos</h2>
@@ -96,6 +97,6 @@ export function Projects() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
