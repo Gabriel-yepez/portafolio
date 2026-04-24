@@ -1,6 +1,6 @@
-import { Badge } from "./ui/badge";
 import { useTechnologies } from "../hooks/useTechnologies";
 import { assetUrl } from "../services/api";
+import { MotionSection } from "./ui/MotionSection";
 
 export function Technologies() {
   const { data, isError } = useTechnologies();
@@ -8,42 +8,39 @@ export function Technologies() {
   if (isError || !data) return null;
 
   return (
-    <section id="technologies" className="py-8 md:py-20 px-4 defer-section">
+    <MotionSection id="technologies" className="py-20 px-4">
       <div className="container mx-auto">
-        <section className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4 text-4xl font-semibold">Tecnologías</h2>
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <h2 className="text-4xl font-bold mb-4">Tecnologías</h2>
           <p className="text-lg text-muted-foreground">
             Estas son algunas de las tecnologías y herramientas con las que trabajo
           </p>
-        </section>
+        </div>
 
-        <article className="max-w-5xl mx-auto px-8 grid md:grid-cols-2 gap-8 md:px-20">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
           {data.map((category) => (
             <div key={category.id} className="space-y-4">
-              <h3 className="text-center">{category.title}</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 w-full gap-2">
+              <p className="text-xs font-semibold tracking-wider uppercase text-accent">
+                {category.title}
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {category.technologies.map((tech) => (
-                  <Badge
-                    key={tech.id}
-                    variant="secondary"
-                    className="px-4 py-2 hover:bg-primary hover:text-primary-foreground
-                    transition-colors cursor-default flex justify-center items-center w-full"
-                  >
+                  <div key={tech.id} className="tech-chip">
                     {tech.icon && (
                       <img
                         src={assetUrl(tech.icon.url)}
                         alt={tech.name}
-                        className="w-6 h-6 mr-2 inline-block"
+                        className="w-5 h-5 object-contain flex-shrink-0"
                       />
                     )}
-                    {tech.name}
-                  </Badge>
+                    <span className="truncate">{tech.name}</span>
+                  </div>
                 ))}
               </div>
             </div>
           ))}
-        </article>
+        </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
