@@ -93,7 +93,11 @@ export function Header() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="text-left text-sm py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                className={`text-left text-sm py-2 transition-colors cursor-pointer ${
+                  activeSection === id
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {label}
               </button>
