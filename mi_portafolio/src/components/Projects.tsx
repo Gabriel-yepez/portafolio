@@ -5,9 +5,7 @@ import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useProjects } from "../hooks/useProjects";
 import { assetUrl } from "../services/api";
-import { useInView } from "../hooks/useInView";
 import { motion } from "framer-motion";
-import { MotionSection } from "./ui/MotionSection";
 
 const container = {
   hidden: {},
@@ -21,12 +19,11 @@ const item = {
 
 export function Projects() {
   const { data, isError } = useProjects();
-  const { ref, inView } = useInView<HTMLDivElement>(0.1);
 
   if (isError || !data) return null;
 
   return (
-    <MotionSection id="projects" className="py-20 px-4">
+    <section id="projects" className="py-20 px-4">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-14">
           <h2 className="text-4xl font-bold mb-4">Proyectos</h2>
@@ -36,10 +33,10 @@ export function Projects() {
         </div>
 
         <motion.div
-          ref={ref}
           variants={container}
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
           className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
         >
           {data.map((project) => (
@@ -97,6 +94,6 @@ export function Projects() {
           ))}
         </motion.div>
       </div>
-    </MotionSection>
+    </section>
   );
 }
