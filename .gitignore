@@ -1,0 +1,19 @@
+# Local Netlify folder
+.netlify
+
+# Dependencies
+**/node_modules/
+
+# Env files
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Build output
+**/dist/
+
+# Strapi generated types (regenerated on build)
+cms-strapi-portafolio/types/generated/
+
+# Temp files
+cms-strapi-portafolio/node_modules

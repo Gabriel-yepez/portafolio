@@ -19,7 +19,9 @@ export const api = {
   footer: () => get<Footer>('/api/footer?populate=*'),
   global: () => get<Global>('/api/global?populate=*'),
   projects: () =>
-    get<Project[]>('/api/projects?populate[technologies]=*&sort=order:asc'),
+    get<Project[]>(
+      '/api/projects?populate[technologies][fields][0]=name&populate[technologies][fields][1]=slug&populate[image][fields][0]=url&populate[image][fields][1]=formats&sort=order:asc',
+    ),
   categories: () =>
     get<TechCategory[]>(
       '/api/tech-categories?populate[technologies][populate]=icon&sort=order:asc',

@@ -1,63 +1,64 @@
-import { Send } from 'lucide-react'
-import { Card, CardContent } from './ui/card'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { Textarea } from './ui/textarea'
-import { useState } from 'react'
-import { useContact } from '../hooks/useContact'
-import { ICON_MAP } from '../lib/icons'
-import { ContactSkeleton } from './ui/skeleton'
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { useState } from "react";
+import { Send } from "lucide-react";
+import { sendEmail } from "../services/emailServices";
+import { type ContactFormErrors, validateContactForm } from "../validation/validationForm";
+import { useContact } from "../hooks/useContact";
+import { ICON_MAP } from "../lib/icons";
 
 export function Contact() {
-  const { data, isLoading, isError } = useContact()
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
+  const { data, isError } = useContact();
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSending, setIsSending] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Formulario enviado:', formData)
-    alert('Mensaje enviado! (Esta es una demostración)')
-    setFormData({ name: '', email: '', message: '' })
-  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSuccessMessage(null);
+    setErrorMessage(null);
+    const validationResult = validateContactForm(formData);
+    if (!validationResult.isValid) {
+      setFormErrors(validationResult.errors);
+      setErrorMessage("Por favor corrige los errores del formulario.");
+      return;
+    }
+    setFormErrors({});
+    sendEmail(e.currentTarget, setIsSending, setFormData)
+      .then(() => setSuccessMessage("Mensaje enviado correctamente. Gracias!"))
+      .catch((err) => {
+        setErrorMessage("Error enviando el mensaje. Intenta nuevamente más tarde.");
+        console.error(err);
+      });
+  };
 
-  if (isLoading) return <ContactSkeleton />
-  if (isError)
-    return (
-      <section
-        id="contact"
-        className="py-10 px-4 flex items-center justify-center"
-      >
-        <p className="text-muted-foreground">No se pudo cargar esta sección.</p>
-      </section>
-    )
-
-  if (!data) return null
+  if (isError || !data) return null;
 
   return (
-    <section id="contact" className="py-10 px-4">
+    <section id="contact" className="py-10 px-4 defer-section">
       <div className="container mx-auto">
         <section className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="mb-4 text-2xl font-semibold">{data.title}</h2>
-          <p className="text-lg text-muted-foreground">{data.description}</p>
+          <h2 className="mb-4 text-4xl font-semibold">{data.title}</h2>
+          <p className="text-xl text-muted-foreground">{data.description}</p>
         </section>
 
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Contact Info */}
           <div className="space-y-6">
             <section>
-              <h3 className="mb-4 text-center">Información de contacto</h3>
+              <h3 className="mb-4 text-lg text-center">Información de contacto</h3>
               <p className="text-muted-foreground mb-6">
                 No dudes en contactarme a través de cualquiera de estos medios.
                 Respondo lo más rápido posible.
               </p>
             </section>
-
             <section className="space-y-4">
               {data.infoItems.map((item, index) => {
-                const Icon = ICON_MAP[item.iconName]
+                const Icon = ICON_MAP[item.iconName];
                 return (
                   <Card key={index}>
                     <CardContent className="pt-6">
@@ -66,14 +67,9 @@ export function Contact() {
                           {Icon && <Icon className="w-5 h-5 text-primary" />}
                         </picture>
                         <article>
-                          <p className="text-sm text-muted-foreground">
-                            {item.title}
-                          </p>
+                          <p className="text-muted-foreground">{item.title}</p>
                           {item.link ? (
-                            <a
-                              href={item.link}
-                              className="hover:text-primary transition-colors"
-                            >
+                            <a href={item.link} className="hover:text-primary transition-colors">
                               {item.value}
                             </a>
                           ) : (
@@ -83,7 +79,7 @@ export function Contact() {
                       </div>
                     </CardContent>
                   </Card>
-                )
+                );
               })}
             </section>
           </div>
@@ -91,64 +87,82 @@ export function Contact() {
           {/* Contact Form */}
           <Card>
             <CardContent className="pt-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div>
-                  <label htmlFor="name" className="block mb-2">
-                    Nombre
-                  </label>
+                  <label htmlFor="name" className="block mb-2">Nombre</label>
                   <Input
                     id="name"
+                    name="name"
                     type="text"
                     placeholder="Tu nombre"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    required
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, name: value }));
+                      if (formErrors.name) setFormErrors((prev) => ({ ...prev, name: undefined }));
+                    }}
                   />
+                  {formErrors.name && <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>}
                 </div>
+
                 <div>
-                  <label htmlFor="email" className="block mb-2">
-                    Email
-                  </label>
+                  <label htmlFor="email" className="block mb-2">Email</label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="tu@email.com"
                     value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, email: value }));
+                      if (formErrors.email) setFormErrors((prev) => ({ ...prev, email: undefined }));
+                    }}
                   />
+                  {formErrors.email && <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>}
                 </div>
+
                 <div>
-                  <label htmlFor="message" className="block mb-2">
-                    Mensaje
-                  </label>
+                  <label htmlFor="message" className="block mb-2">Mensaje</label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Escribe tu mensaje aquí..."
                     rows={5}
                     value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    required
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData((prev) => ({ ...prev, message: value }));
+                      if (formErrors.message) setFormErrors((prev) => ({ ...prev, message: undefined }));
+                    }}
                   />
+                  {formErrors.message && <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>}
                 </div>
+
                 <Button
                   type="submit"
+                  disabled={isSending}
                   className="w-full cursor-pointer hover:bg-switch-background"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Enviar mensaje
+                  {isSending ? "Enviando..." : "Enviar mensaje"}
                 </Button>
               </form>
+
+              {successMessage && (
+                <div className="mt-4 rounded-md bg-green-50 border border-green-200 p-3 text-green-800">
+                  {successMessage}
+                </div>
+              )}
+              {errorMessage && (
+                <div className="mt-4 rounded-md bg-red-50 border border-red-200 p-3 text-red-800">
+                  {errorMessage}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
       </div>
     </section>
-  )
+  );
 }
