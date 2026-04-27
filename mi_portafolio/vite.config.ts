@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 import sitemap from 'vite-plugin-sitemap'
 import { fileURLToPath, URL } from 'node:url'
 
+/// <reference types="vitest" />
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const devPort = Number(env.VITE_DEV_PORT ?? 5173)
@@ -44,6 +46,17 @@ export default defineConfig(({ mode }) => {
     ssgOptions: {
       script: 'async',
       formatting: 'minify',
+    },
+    test: {
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: ['./src/test/setup.ts'],
+      include: ['src/**/*.test.{ts,tsx}'],
+      coverage: {
+        provider: 'v8',
+        include: ['src/components/seo-schemas.ts'],
+        thresholds: { lines: 90, functions: 90, branches: 80 },
+      },
     },
   }
 })
