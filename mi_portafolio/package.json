@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite-ssg build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -22,9 +22,12 @@
     "lucide-react": "^0.294.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-helmet-async": "^3.0.0",
+    "react-router-dom": "^7.14.2",
     "swiper": "^12.0.3",
     "tailwind-merge": "^2.1.0",
     "tailwindcss": "^4.1.14",
+    "vite-ssg": "^28.3.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {
@@ -40,6 +43,7 @@
     "globals": "^16.4.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0",
-    "vite": "npm:rolldown-vite@7.2.7"
+    "vite": "npm:rolldown-vite@7.2.7",
+    "vite-plugin-sitemap": "^0.8.2"
   }
 }
