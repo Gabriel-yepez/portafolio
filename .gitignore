@@ -17,3 +17,9 @@ cms-strapi-portafolio/types/generated/
 
 # Temp files
 cms-strapi-portafolio/node_modules
+
+# Claude Code settings
+.claude/
+
+# Test coverage output
+**/coverage/
