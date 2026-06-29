@@ -2,7 +2,7 @@ import type {
   Hero, About, Contact, Footer, Global, Project, TechCategory, Certification,
 } from '../types/cms'
 
-const BASE = import.meta.env.VITE_STRAPI_URL ?? 'http://localhost:1337'
+const BASE = import.meta.env.VITE_STRAPI_URL
 
 export const assetUrl = (url: string) => `${BASE}${url}`
 
