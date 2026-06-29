@@ -5,7 +5,7 @@ import { queryClient } from "./lib/queryClient";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { SEO } from "./components/SEO";
-import { SectionSkeleton } from "./components/ui/Skeleton";
+import { SectionSkeleton } from "./components/ui/skeleton";
 
 const AboutSection = lazy(() =>
   import("./components/About").then((m) => ({ default: m.About }))
