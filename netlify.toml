@@ -1,0 +1,15 @@
+[build]
+  # La app vive en mi_portafolio/, no en la raíz del repo
+  base = "mi_portafolio"
+  command = "pnpm build"
+  # Relativo a base -> mi_portafolio/dist
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Fallback SPA: cualquier ruta no encontrada cae al index ya prerenderizado
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
