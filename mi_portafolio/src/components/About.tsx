@@ -1,6 +1,7 @@
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { useAbout } from "../hooks/useAbout";
+import { assetUrl } from "../services/api";
 import { ICON_MAP } from "../lib/icons";
 import { MotionSection } from "./ui/MotionSection";
 import { motion, type Variants } from "framer-motion";
@@ -19,7 +20,9 @@ export function About() {
 
   if (isError || !data) return null;
 
-  const cvUrl = data.cvUrl ?? import.meta.env.VITE_CV_URL ?? "/cv.pdf";
+  const cvUrl = data.cvUrl
+    ? assetUrl(data.cvUrl)
+    : import.meta.env.VITE_CV_URL ?? "/cv.pdf";
 
   return (
     <MotionSection id="about" className="py-20 px-4">

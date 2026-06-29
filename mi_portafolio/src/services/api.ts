@@ -4,7 +4,21 @@ import type {
 
 const BASE = import.meta.env.VITE_STRAPI_URL
 
-export const assetUrl = (url: string) => `${BASE}${url}`
+// Normaliza la URL de un asset de Strapi hacia el BASE actual:
+// - relativa (/uploads/..)            -> antepone BASE
+// - absoluta a localhost/127.0.0.1    -> reescribe el path sobre BASE (dato viejo)
+// - absoluta a otro host (CDN, S3..)  -> se deja intacta
+export const assetUrl = (url: string) => {
+  if (!url) return url
+  if (/^https?:\/\//i.test(url)) {
+    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i.test(url)) {
+      const { pathname, search } = new URL(url)
+      return `${BASE}${pathname}${search}`
+    }
+    return url
+  }
+  return `${BASE}${url}`
+}
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`)
