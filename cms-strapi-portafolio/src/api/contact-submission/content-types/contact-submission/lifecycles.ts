@@ -2,11 +2,15 @@
  * Lifecycle hooks for the contact-submission content type.
  *
  * After every successful create, send a notification email to SMTP_TO using
- * the configured email plugin provider (see config/plugins.ts).
+ * the configured email plugin provider (see config/plugins.ts). The email
+ * body is a React Email template rendered to HTML/plain text.
  *
  * Failures are logged but never thrown: the API response to the public
  * client must succeed regardless of mail-delivery problems.
  */
+
+import { render } from '@react-email/render';
+import { ContactNotificationEmail } from '../../../../emails/ContactNotificationEmail';
 
 type LifecycleEvent = {
   result: {
@@ -16,14 +20,6 @@ type LifecycleEvent = {
     message: string;
   };
 };
-
-const escapeHtml = (value: string): string =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 
 export default {
   async afterCreate(event: LifecycleEvent) {
@@ -37,25 +33,25 @@ export default {
       return;
     }
 
-    const safeName = escapeHtml(result.name);
-    const safeEmail = escapeHtml(result.email);
-    const safeMessage = escapeHtml(result.message).replace(/\n/g, '<br/>');
+    const emailElement = ContactNotificationEmail({
+      name: result.name,
+      email: result.email,
+      message: result.message,
+      submissionId: result.id,
+    });
 
     try {
+      const [html, text] = await Promise.all([
+        render(emailElement),
+        render(emailElement, { plainText: true }),
+      ]);
+
       await strapi.plugins.email.services.email.send({
         to,
         replyTo: result.email,
         subject: `Nuevo mensaje de contacto de ${result.name}`,
-        text:
-          `Nombre: ${result.name}\n` +
-          `Email: ${result.email}\n\n` +
-          `Mensaje:\n${result.message}`,
-        html:
-          `<h2>Nuevo mensaje de contacto</h2>` +
-          `<p><strong>Nombre:</strong> ${safeName}</p>` +
-          `<p><strong>Email:</strong> ${safeEmail}</p>` +
-          `<p><strong>Mensaje:</strong></p>` +
-          `<p>${safeMessage}</p>`,
+        text,
+        html,
       });
     } catch (err) {
       strapi.log.error(

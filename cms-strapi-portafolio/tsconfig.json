@@ -4,6 +4,7 @@
     "moduleResolution": "Node",
     "lib": ["ES2020"],
     "target": "ES2019",
+    "jsx": "react-jsx",
     "strict": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,6 +21,8 @@
     "./",
     // Include all ts files
     "./**/*.ts",
+    // Include all tsx files (React Email templates)
+    "./**/*.tsx",
     // Include all js files
     "./**/*.js",
     // Force the JSON files in the src folder to be included

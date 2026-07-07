@@ -16,6 +16,8 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
+    "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.0.10",
     "@strapi/plugin-cloud": "5.43.0",
     "@strapi/plugin-users-permissions": "5.43.0",
     "@strapi/provider-email-nodemailer": "^5.43.0",
